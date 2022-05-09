@@ -1,0 +1,53 @@
+package org.wso2.carbon.identity.auth.connector.entgra.internal;
+
+import org.wso2.carbon.identity.governance.IdentityGovernanceService;
+import org.wso2.carbon.registry.core.service.RegistryService;
+import org.wso2.carbon.user.core.service.RealmService;
+
+public class EntgraConnectorServiceHolder {
+
+    public static EntgraConnectorServiceHolder instance = new EntgraConnectorServiceHolder();
+
+    private RealmService realmService;
+    private RegistryService registryService;
+    private IdentityGovernanceService identityGovernanceService;
+
+    private EntgraConnectorServiceHolder() {
+
+    }
+
+    public static EntgraConnectorServiceHolder getInstance() {
+
+        return instance;
+    }
+
+    public RealmService getRealmService() {
+
+        return realmService;
+    }
+
+    public void setRealmService(RealmService realmService) {
+
+        this.realmService = realmService;
+    }
+
+    public RegistryService getRegistryService() {
+
+        return registryService;
+    }
+
+    public void setRegistryService(RegistryService registryService) {
+
+        this.registryService = registryService;
+    }
+
+    public IdentityGovernanceService getIdentityGovernanceService() {
+
+        return identityGovernanceService;
+    }
+
+    public void setIdentityGovernanceService(IdentityGovernanceService identityGovernanceService) {
+
+        this.identityGovernanceService = identityGovernanceService;
+    }
+}
