@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1652171112127
+Build-Jdk: 1.8.0_202
+Built-By: user
+Bundle-Description: WSO2 is an open source application development softw
+ are company focused on providing service-oriented        architecture s
+ olutions for professional developers.
+Bundle-DocURL: http://www.wso2.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: org.wso2.carbon.identity.conditional.auth.functions.entgra
+Bundle-SymbolicName: org.wso2.carbon.identity.conditional.auth.functions
+ .entgra
+Bundle-Vendor: WSO2
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Import-Package: org.apache.commons.logging;version="1.2",org.osgi.servic
+ e.component;version="[1.2.0,2.0.0)",org.wso2.carbon.identity.applicatio
+ n.authentication.framework;version="[5.14.97,6.0.0)",org.osgi.framework
+ ;version="[1.7.0,2.0.0)",org.wso2.carbon.identity.application.authentic
+ ation.framework.config.model.graph.js;version="[5.14.97,6.0.0)",org.osg
+ i.service.component.annotations;version="[1.2.0,2.0.0)",org.wso2.carbon
+ .identity.application.authentication.framework.util;version="[5.14.97,6
+ .0.0)",org.wso2.carbon.identity.application.authentication.framework.co
+ nfig.model;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.applicati
+ on.authentication.framework.exception;version="[5.14.97,6.0.0)",org.apa
+ che.commons.lang;version="2.6",org.wso2.carbon.identity.application.com
+ mon.model;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.applicatio
+ n.authentication.framework.config.model.graph;version="[5.14.97,6.0.0)"
+ ,org.wso2.carbon.identity.application.authentication.framework.context;
+ version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.authenti
+ cation.framework.model;version="[5.14.97,6.0.0)"
+Service-Component: OSGI-INF/org.wso2.carbon.identity.conditional.auth.fu
+ nctions.entgra.internal.EntgraFunctionsServiceComponent.xml
+Tool: Bnd-2.1.0.20130426-122213

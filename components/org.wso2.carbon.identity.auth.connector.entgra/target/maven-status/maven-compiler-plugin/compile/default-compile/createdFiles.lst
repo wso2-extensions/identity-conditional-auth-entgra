@@ -1,0 +1,3 @@
+org/wso2/carbon/identity/auth/connector/entgra/internal/EntgraConnectorServiceHolder.class
+org/wso2/carbon/identity/auth/connector/entgra/EntgraConfigImpl.class
+org/wso2/carbon/identity/auth/connector/entgra/internal/EntgraConnectorServiceComponent.class

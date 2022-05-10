@@ -35,6 +35,7 @@ public class EntgraConnectorServiceComponent {
             BundleContext bundleContext = ctxt.getBundleContext();
             EntgraConfigImpl entgraFunctionConfig = new EntgraConfigImpl();
             bundleContext.registerService(IdentityConnectorConfig.class.getName(), entgraFunctionConfig, null);
+
         } catch (Throwable e) {
             LOG.error("Error while activating Entgra Connector", e);
         }

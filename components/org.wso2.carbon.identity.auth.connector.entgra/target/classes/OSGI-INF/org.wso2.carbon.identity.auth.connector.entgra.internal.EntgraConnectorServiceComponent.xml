@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="identity.auth.connector.entgra" activate="activate" deactivate="deactivate">
+    <reference name="user.realmservice.default" interface="org.wso2.carbon.user.core.service.RealmService" cardinality="1..1" policy="dynamic" bind="setRealmService" unbind="unsetRealmService"/>
+    <reference name="registry.service" interface="org.wso2.carbon.registry.core.service.RegistryService" cardinality="1..1" policy="dynamic" bind="setRegistryService" unbind="unsetRegistryService"/>
+    <reference name="identity.governance.service" interface="org.wso2.carbon.identity.governance.IdentityGovernanceService" cardinality="1..1" policy="dynamic" bind="setIdentityGovernanceService" unbind="unsetIdentityGovernanceService"/>
+    <implementation class="org.wso2.carbon.identity.auth.connector.entgra.internal.EntgraConnectorServiceComponent"/>
+</scr:component>

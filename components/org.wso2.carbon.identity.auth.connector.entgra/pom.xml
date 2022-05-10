@@ -89,13 +89,18 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>
-
+                            org.wso2.carbon.identity.auth.connector.entgra.internal
                         </Private-Package>
                         <Export-Package>
+                            !org.wso2.carbon.identity.auth.connector.entgra.internal
                             org.wso2.carbon.identity.auth.connector.entgra.*
                         </Export-Package>
                         <Import-Package>
-                            org.wso2.carbon.identity.application.common.*;version="${carbon.identity.framework.version}",
+                            org.apache.commons.lang;version="${apache.commons.lang.imp.pkg.version}",
+                            org.apache.commons.logging;version="${apache.commons.logging.imp.pkg.version}",
+                            org.osgi.service.component;version="${osgi.service.component.imp.pkg.version.range}",
+                            org.osgi.service.component.annotations;version="${osgi.service.component.imp.pkg.version.range}",
+                            org.osgi.framework;version="${osgi.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.authentication.framework;
                             version="${carbon.identity.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.authentication.framework.util;
@@ -116,16 +121,9 @@
                             version="${carbon.identity.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.governance,
                             org.wso2.carbon.identity.governance.common,
-                            org.wso2.carbon.identity.event;
                             version="${carbon.identity.framework.imp.pkg.version.range}",
-                            org.apache.commons.lang;version="${apache.commons.lang.imp.pkg.version}",
-                            org.apache.commons.logging;version="${apache.commons.logging.imp.pkg.version}",
-                            org.osgi.service.component;version="${osgi.service.component.imp.pkg.version.range}",
-                            org.osgi.service.component.annotations;version="${osgi.service.component.imp.pkg.version.range}",
-                            org.osgi.framework;version="${osgi.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.governance,
                             org.wso2.carbon.identity.governance.common,
-
                         </Import-Package>
                     </instructions>
                 </configuration>
