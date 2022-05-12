@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1652341540064
+Bnd-LastModified: 1652358010492
 Build-Jdk: 1.8.0_202
 Built-By: user
 Bundle-Description: WSO2 is an open source application development softw
@@ -22,22 +22,10 @@ Import-Package: org.apache.commons.logging;version="1.2",org.osgi.servic
  ersion="[5.14.97,6.0.0)",org.wso2.carbon.identity.governance;version="[
  1.4,2)",org.wso2.carbon.identity.governance.common;version="[1.4,2)",or
  g.wso2.carbon.registry.core.service;version="[1.0,2)",org.wso2.carbon.u
- ser.core.service;version="[4.5.1,5.0.0)",org.wso2.carbon.identity.event
- ;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.authent
- ication.framework.exception;version="[5.14.97,6.0.0)",org.wso2.carbon.i
- dentity.application.authentication.framework.util;version="[5.14.97,6.0
- .0)",org.wso2.carbon.identity.application.authentication.framework.cont
- ext;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.auth
- entication.framework.config.model.graph.js;version="[5.14.97,6.0.0)",or
- g.osgi.service.component.annotations;version="[1.2.0,2.0.0)",org.wso2.c
- arbon.identity.application.common.model;version="[5.14.97,6.0.0)",org.a
- pache.commons.lang;version="2.6",org.wso2.carbon.identity.application.a
- uthentication.framework.config.model;version="[5.14.97,6.0.0)",org.wso2
- .carbon.identity.application.authentication.framework.config.model.grap
- h;version="[5.14.97,6.0.0)",org.wso2.carbon.user.core.claim;version="[4
- .5.1,5.0.0)",org.wso2.carbon.identity.application.authentication.framew
- ork.model;version="[5.14.97,6.0.0)",org.wso2.carbon.user.core;version="
- [4.5.1,5.0.0)"
+ ser.core.service;version="[4.5.1,5.0.0)",org.osgi.service.component.ann
+ otations;version="[1.2.0,2.0.0)",org.wso2.carbon.identity.application.a
+ uthentication.framework.context;version="[5.14.97,6.0.0)",org.apache.co
+ mmons.lang;version="2.6",version=[5.14.97,6.0.0)
 Service-Component: OSGI-INF/org.wso2.carbon.identity.auth.connector.entg
  ra.internal.EntgraConnectorServiceComponent.xml
 Tool: Bnd-2.1.0.20130426-122213

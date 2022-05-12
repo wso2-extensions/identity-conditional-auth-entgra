@@ -3,6 +3,5 @@ org/wso2/carbon/identity/conditional/auth/functions/entgra/GetDeviceInfoEntgraFu
 org/wso2/carbon/identity/conditional/auth/functions/entgra/exception/EntgraConnectorException.class
 org/wso2/carbon/identity/conditional/auth/functions/entgra/GetDeviceInfoEntgraFunctionImpl.class
 org/wso2/carbon/identity/conditional/auth/functions/entgra/Constants.class
-org/wso2/carbon/identity/conditional/auth/functions/entgra/utils/CommonUtil.class
-org/wso2/carbon/identity/conditional/auth/functions/entgra/utils/HTTPFunction.class
+org/wso2/carbon/identity/conditional/auth/functions/entgra/Util.class
 org/wso2/carbon/identity/conditional/auth/functions/entgra/internal/EntgraFunctionsServiceComponent.class

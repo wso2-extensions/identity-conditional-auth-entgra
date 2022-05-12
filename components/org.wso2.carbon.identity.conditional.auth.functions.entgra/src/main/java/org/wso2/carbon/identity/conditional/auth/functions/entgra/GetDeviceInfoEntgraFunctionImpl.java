@@ -86,6 +86,8 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 try {
                     HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret, username, credential);
 
+                    // For catching and logging error
+                    String errorURL = tokenURL;
                     try (CloseableHttpResponse tResponse = client.execute(tokenRequest)) {
                         int tokenResponseCode = tResponse.getStatusLine().getStatusCode();
 
@@ -97,32 +99,36 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
                             HttpGet deviceInfoRequest = getDeviceInfoRequest(deviceInfoURL, accessToken);
 
+                            tResponse.close(); // Closing the CloseableHttpResponse before starting new one
                             try (CloseableHttpResponse dResponse = client.execute(deviceInfoRequest)) {
                                 int dResponseCode = dResponse.getStatusLine().getStatusCode();
 
                                 if (dResponseCode >= 200 && dResponseCode < 300) {
-                                    String dJsonString = EntityUtils.toString(tResponse.getEntity());
+                                    String dJsonString = EntityUtils.toString(dResponse.getEntity());
                                     JSONObject jsonDeviceInfoResponse = (JSONObject) parser.parse(dJsonString);
+                                    response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
                                     outcome = OUTCOME_SUCCESS;
-
                                 } else {
 
                                     LOG.error("Error while fetching device information from Entgra Server. Response code: " + dResponseCode);
                                     outcome = OUTCOME_FAIL;
                                 }
+                            } catch (Exception e) {
+                                errorURL = deviceInfoURL;
+                                throw e;
                             }
                         } else {
                             LOG.error("Error while requesting access token from Entgra Server. Response code: " + tokenResponseCode);
                             outcome = OUTCOME_FAIL;
                         }
                     } catch (IllegalArgumentException e) {
-                        LOG.error("Invalid Url: " + tokenURL, e);
+                        LOG.error("Invalid Url: " + errorURL, e);
                         outcome = OUTCOME_FAIL;
                     } catch (ConnectTimeoutException e) {
-                        LOG.error("Error while waiting to connect to " + tokenURL, e);
+                        LOG.error("Error while waiting to connect to " + errorURL, e);
                         outcome = OUTCOME_TIMEOUT;
                     } catch (SocketTimeoutException e) {
-                        LOG.error("Error while waiting for data from " + tokenURL, e);
+                        LOG.error("Error while waiting for data from " + errorURL, e);
                         outcome = OUTCOME_TIMEOUT;
                     } catch (IOException e) {
                         LOG.error("Error while calling endpoint. ", e);

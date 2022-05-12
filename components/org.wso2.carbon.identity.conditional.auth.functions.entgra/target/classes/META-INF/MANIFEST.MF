@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1652341536809
+Bnd-LastModified: 1652358007035
 Build-Jdk: 1.8.0_202
 Built-By: user
 Bundle-Description: WSO2 is an open source application development softw
@@ -18,40 +18,27 @@ Export-Package: org.wso2.carbon.identity.conditional.auth.functions.entg
  ra;uses:="org.wso2.carbon.identity.application.authentication.framework
  .config.model.graph.js,org.wso2.carbon.identity.conditional.auth.functi
  ons.entgra.exception";version="1.0.0.SNAPSHOT",org.wso2.carbon.identity
- .conditional.auth.functions.entgra.exception;version="1.0.0.SNAPSHOT",o
- rg.wso2.carbon.identity.conditional.auth.functions.entgra.utils;uses:="
- org.apache.http.client.methods,org.wso2.carbon.identity.application.aut
- hentication.framework.config.model.graph.js";version="1.0.0.SNAPSHOT"
+ .conditional.auth.functions.entgra.exception;version="1.0.0.SNAPSHOT"
 Import-Package: org.apache.commons.logging;version="1.2",org.apache.http
- ;version="[4.3,5)",org.apache.http.entity;version="[4.3,5)",org.apache.
- http.util;version="[4.3,5)",org.apache.http.client.entity;version="[4.3
- ,5)",org.apache.http.client.methods;version="[4.3,5)",org.apache.http.c
- lient.config;version="[4.3,5)",org.apache.http.impl.client;version="[4.
- 3,5)",org.apache.http.conn;version="[4.3,5)",org.apache.http.message;ve
- rsion="[4.3,5)",org.osgi.service.component;version="[1.2.0,2.0.0)",org.
- json.simple,org.json.simple.parser,org.wso2.carbon.identity.application
- .authentication.framework;version="[5.14.97,6.0.0)",org.wso2.carbon.ide
- ntity.application.authentication.framework.exception;version="[5.14.97,
- 6.0.0)",org.wso2.carbon.identity.application.authentication.framework.m
- odel;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.aut
- hentication.framework.config.model.graph.js;version="[5.14.97,6.0.0)",o
- rg.wso2.carbon.identity.application.authentication.framework.config.mod
- el.graph;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application
- .authentication.framework.context;version="[5.14.97,6.0.0)",org.wso2.ca
- rbon.identity.conditional.auth.functions.common.utils;version="[1.1,2)"
- ,org.wso2.carbon.identity.event;version="[5.14.97,6.0.0)",org.wso2.carb
- on.identity.application.authentication.framework.util;version="[5.14.97
- ,6.0.0)",org.wso2.carbon.user.core;version="[4.5.1,5.0.0)",org.wso2.car
- bon.identity.application.common.model;version="[5.14.97,6.0.0)",org.osg
- i.framework;version="[1.7.0,2.0.0)",org.osgi.service.component.annotati
- ons;version="[1.2.0,2.0.0)",org.wso2.carbon.registry.core.service;versi
- on="[1.0,2)",org.apache.http.client;version="[4.3,5)",org.wso2.carbon.u
- ser.core.service;version="[4.5.1,5.0.0)",org.apache.http.impl;version="
- [4.3,5)",org.wso2.carbon.identity.application.authentication.framework.
- config.model;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.governa
- nce.common;version="[1.4,2)",org.wso2.carbon.user.core.claim;version="[
- 4.5.1,5.0.0)",org.apache.commons.lang;version="2.6",org.wso2.carbon.ide
- ntity.governance;version="[1.4,2)"
+ ;version="[4.3,5)",org.apache.http.util;version="[4.3,5)",org.apache.ht
+ tp.client.entity;version="[4.3,5)",org.apache.http.client.methods;versi
+ on="[4.3,5)",org.apache.http.client.config;version="[4.3,5)",org.apache
+ .http.impl.client;version="[4.3,5)",org.apache.http.conn;version="[4.3,
+ 5)",org.apache.http.message;version="[4.3,5)",org.json.simple,org.json.
+ simple.parser,org.osgi.service.component;version="[1.2.0,2.0.0)",org.ws
+ o2.carbon.identity.application.authentication.framework;version="[5.14.
+ 97,6.0.0)",org.wso2.carbon.identity.application.authentication.framewor
+ k.config.model.graph.js;version="[5.14.97,6.0.0)",org.wso2.carbon.ident
+ ity.application.authentication.framework.config.model.graph;version="[5
+ .14.97,6.0.0)",org.wso2.carbon.identity.application.authentication.fram
+ ework.context;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.condit
+ ional.auth.functions.common.utils;version="[1.1,2)",org.wso2.carbon.ide
+ ntity.event;version="[5.14.97,6.0.0)",org.apache.http.entity;version="[
+ 4.3,5)",org.apache.http.impl;version="[4.3,5)",org.apache.commons.lang;
+ version="2.6",org.wso2.carbon.identity.application.authentication.frame
+ work.config.model;version="[5.14.97,6.0.0)",org.osgi.framework;version=
+ "[1.7.0,2.0.0)",org.osgi.service.component.annotations;version="[1.2.0,
+ 2.0.0)",org.apache.http.client;version="[4.3,5)"
 Service-Component: OSGI-INF/org.wso2.carbon.identity.conditional.auth.fu
  nctions.entgra.internal.EntgraFunctionsServiceComponent.xml
 Tool: Bnd-2.1.0.20130426-122213
