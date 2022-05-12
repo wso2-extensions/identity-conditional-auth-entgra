@@ -9,4 +9,9 @@ public abstract class Constants {
     public static final String USERNAME = "adaptive_authentication.entgra.username";
     public static final String CREDENTIAL = "__secret__adaptive_authentication.entgra.password";
 
+    public static final String TYPE_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
+    public static final String TYPE_APPLICATION_JSON = "application/json";
+    public static final String ACCESS_TOKEN = "access_token";
+
+
 }

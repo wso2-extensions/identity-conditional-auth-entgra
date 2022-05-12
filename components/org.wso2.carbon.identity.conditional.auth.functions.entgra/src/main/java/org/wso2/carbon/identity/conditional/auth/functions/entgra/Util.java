@@ -1,9 +1,9 @@
-package org.wso2.carbon.identity.conditional.auth.functions.entgra.utils;
+package org.wso2.carbon.identity.conditional.auth.functions.entgra;
 
 import org.wso2.carbon.identity.application.authentication.framework.config.model.graph.js.JsAuthenticatedUser;
 import org.wso2.carbon.identity.application.authentication.framework.config.model.graph.js.JsAuthenticationContext;
 
-public abstract class CommonUtil {
+public abstract class Util {
 
     /**
      * Function that is used get the user from the context.

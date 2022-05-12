@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1652171115409
+Bnd-LastModified: 1652341540064
 Build-Jdk: 1.8.0_202
 Built-By: user
 Bundle-Description: WSO2 is an open source application development softw
@@ -13,25 +13,31 @@ Bundle-SymbolicName: org.wso2.carbon.identity.auth.connector.entgra
 Bundle-Vendor: WSO2
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
+Export-Package: org.wso2.carbon.identity.auth.connector.entgra;uses:="or
+ g.wso2.carbon.identity.governance,org.wso2.carbon.identity.governance.c
+ ommon";version="1.0.0.SNAPSHOT"
 Import-Package: org.apache.commons.logging;version="1.2",org.osgi.servic
  e.component;version="[1.2.0,2.0.0)",org.osgi.framework;version="[1.7.0,
  2.0.0)",org.wso2.carbon.identity.application.authentication.framework;v
  ersion="[5.14.97,6.0.0)",org.wso2.carbon.identity.governance;version="[
  1.4,2)",org.wso2.carbon.identity.governance.common;version="[1.4,2)",or
- g.wso2.carbon.identity.application.authentication.framework.config.mode
- l.graph;version="[5.14.97,6.0.0)",version=[5.14.97,6.0.0),org.wso2.carb
- on.identity.application.common.model;version="[5.14.97,6.0.0)",org.apac
- he.commons.lang;version="2.6",org.wso2.carbon.identity.application.auth
- entication.framework.util;version="[5.14.97,6.0.0)",org.wso2.carbon.ide
- ntity.application.authentication.framework.model;version="[5.14.97,6.0.
- 0)",org.wso2.carbon.identity.governance.common,org.wso2.carbon.identity
- .application.authentication.framework.config.model.graph.js;version="[5
- .14.97,6.0.0)",org.wso2.carbon.identity.application.authentication.fram
- ework.exception;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.appl
- ication.authentication.framework.context;version="[5.14.97,6.0.0)",org.
- wso2.carbon.identity.governance,org.osgi.service.component.annotations;
- version="[1.2.0,2.0.0)",org.wso2.carbon.identity.application.authentica
- tion.framework.config.model;version="[5.14.97,6.0.0)"
+ g.wso2.carbon.registry.core.service;version="[1.0,2)",org.wso2.carbon.u
+ ser.core.service;version="[4.5.1,5.0.0)",org.wso2.carbon.identity.event
+ ;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.authent
+ ication.framework.exception;version="[5.14.97,6.0.0)",org.wso2.carbon.i
+ dentity.application.authentication.framework.util;version="[5.14.97,6.0
+ .0)",org.wso2.carbon.identity.application.authentication.framework.cont
+ ext;version="[5.14.97,6.0.0)",org.wso2.carbon.identity.application.auth
+ entication.framework.config.model.graph.js;version="[5.14.97,6.0.0)",or
+ g.osgi.service.component.annotations;version="[1.2.0,2.0.0)",org.wso2.c
+ arbon.identity.application.common.model;version="[5.14.97,6.0.0)",org.a
+ pache.commons.lang;version="2.6",org.wso2.carbon.identity.application.a
+ uthentication.framework.config.model;version="[5.14.97,6.0.0)",org.wso2
+ .carbon.identity.application.authentication.framework.config.model.grap
+ h;version="[5.14.97,6.0.0)",org.wso2.carbon.user.core.claim;version="[4
+ .5.1,5.0.0)",org.wso2.carbon.identity.application.authentication.framew
+ ork.model;version="[5.14.97,6.0.0)",org.wso2.carbon.user.core;version="
+ [4.5.1,5.0.0)"
 Service-Component: OSGI-INF/org.wso2.carbon.identity.auth.connector.entg
  ra.internal.EntgraConnectorServiceComponent.xml
 Tool: Bnd-2.1.0.20130426-122213

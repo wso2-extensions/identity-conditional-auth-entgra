@@ -17,7 +17,6 @@ import org.wso2.carbon.identity.conditional.auth.functions.entgra.GetDeviceInfoE
 /**
  * OSGI declarative services component which handle Entgra Functions
  */
-
 @Component(
         name = "identity.conditional.auth.functions.entgra",
         immediate = true
@@ -29,12 +28,16 @@ public class EntgraFunctionsServiceComponent {
 
     @Activate
     protected void activate(ComponentContext ctxt) {
+        try {
+            GetDeviceInfoEntgraFunction getDeviceInfoEntgraFunction = new GetDeviceInfoEntgraFunctionImpl();
 
-        GetDeviceInfoEntgraFunction getDeviceInfoEntgraFunction = new GetDeviceInfoEntgraFunctionImpl();
+            JsFunctionRegistry jsFunctionRegistry = EntgraFunctionsServiceHolder.getInstance().getJsFunctionRegistry();
+            jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_ENTGRA_GET_DEVICE_INFO,
+                    getDeviceInfoEntgraFunction);
+        } catch (Throwable e) {
+            LOG.error("Error occurred during conditional authentication user functions bundle activation. ", e);
+        }
 
-        JsFunctionRegistry jsFunctionRegistry = EntgraFunctionsServiceHolder.getInstance().getJsFunctionRegistry();
-        jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_ENTGRA_GET_DEVICE_INFO,
-                getDeviceInfoEntgraFunction);
     }
 
     @Deactivate

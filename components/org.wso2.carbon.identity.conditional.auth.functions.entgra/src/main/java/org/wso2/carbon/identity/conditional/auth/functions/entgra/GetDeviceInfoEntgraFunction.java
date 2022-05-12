@@ -13,9 +13,11 @@ public interface GetDeviceInfoEntgraFunction {
 
     /**
      * Get device information from Entgra IoT server
+     * @param context       Context from authentication flow
      * @param osPlatform    Device's operating system
      * @param deviceID      Device identifier
      * @param eventHandlers Event handlers
+     * @throws EntgraConnectorException When unable to retrieve tenant configuration
      */
     void getDeviceInfoEntgra(JsAuthenticationContext context, String osPlatform, String deviceID, Map<String, Object> eventHandlers)
             throws EntgraConnectorException;
