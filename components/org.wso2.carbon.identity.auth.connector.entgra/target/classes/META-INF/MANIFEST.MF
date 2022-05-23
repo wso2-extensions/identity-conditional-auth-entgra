@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1652358010492
+Bnd-LastModified: 1652955528460
 Build-Jdk: 1.8.0_202
 Built-By: user
 Bundle-Description: WSO2 is an open source application development softw
@@ -19,13 +19,13 @@ Export-Package: org.wso2.carbon.identity.auth.connector.entgra;uses:="or
 Import-Package: org.apache.commons.logging;version="1.2",org.osgi.servic
  e.component;version="[1.2.0,2.0.0)",org.osgi.framework;version="[1.7.0,
  2.0.0)",org.wso2.carbon.identity.application.authentication.framework;v
- ersion="[5.14.97,6.0.0)",org.wso2.carbon.identity.governance;version="[
- 1.4,2)",org.wso2.carbon.identity.governance.common;version="[1.4,2)",or
- g.wso2.carbon.registry.core.service;version="[1.0,2)",org.wso2.carbon.u
- ser.core.service;version="[4.5.1,5.0.0)",org.osgi.service.component.ann
- otations;version="[1.2.0,2.0.0)",org.wso2.carbon.identity.application.a
- uthentication.framework.context;version="[5.14.97,6.0.0)",org.apache.co
- mmons.lang;version="2.6",version=[5.14.97,6.0.0)
+ ersion="5.20.189",org.wso2.carbon.identity.governance;version="[1.4,2)"
+ ,org.wso2.carbon.identity.governance.common;version="[1.4,2)",org.wso2.
+ carbon.registry.core.service;version="[1.0,2)",org.wso2.carbon.user.cor
+ e.service;version="[4.5.1,5.0.0)",org.wso2.carbon.identity.application.
+ authentication.framework.context;version="5.20.189",org.apache.commons.
+ lang;version="2.6",org.osgi.service.component.annotations;version="[1.2
+ .0,2.0.0)"
 Service-Component: OSGI-INF/org.wso2.carbon.identity.auth.connector.entg
  ra.internal.EntgraConnectorServiceComponent.xml
 Tool: Bnd-2.1.0.20130426-122213

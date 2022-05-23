@@ -86,18 +86,24 @@
                             org.osgi.service.component.annotations;version="${osgi.service.component.imp.pkg.version.range}",
                             org.osgi.framework;version="${osgi.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.authentication.framework;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
+                            org.wso2.carbon.identity.application.authentication.framework.util;
+                            version="${carbon.identity.framework.version}",
+                            org.wso2.carbon.identity.application.authentication.framework.exception;
+                            version="${carbon.identity.framework.version}",
+                            org.wso2.carbon.identity.application.authentication.framework.model;
+                            version="${carbon.identity.framework.version}",
                             org.wso2.carbon.identity.application.authentication.framework.config.model.graph.js;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
                             org.wso2.carbon.identity.application.authentication.framework.config.model.graph;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
                             org.wso2.carbon.identity.application.authentication.framework.config.model;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
                             org.wso2.carbon.identity.application.authentication.framework.context;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
                             org.wso2.carbon.identity.conditional.auth.functions.common.*,
                             org.wso2.carbon.identity.event;
-                            version="${carbon.identity.framework.imp.pkg.version.range}",
+                            version="${carbon.identity.framework.version}",
                         </Import-Package>
                     </instructions>
                 </configuration>

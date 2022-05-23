@@ -319,7 +319,7 @@ From: 'WSO2' (http://www.wso2.org/)
     License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
   - WSO2 Carbon - Identity Base (http://www.wso2.com) org.wso2.carbon.identity.framework:org.wso2.carbon.identity.base:bundle:5.19.53
     License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
-  - WSO2 Carbon - Identity Event (http://wso2.org/org.wso2.carbon.identity.event) org.wso2.carbon.identity.framework:org.wso2.carbon.identity.event:bundle:5.19.58
+  - WSO2 Carbon - Identity Event (http://wso2.org/org.wso2.carbon.identity.event) org.wso2.carbon.identity.framework:org.wso2.carbon.identity.event:bundle:5.20.189
     License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
   - WSO2 Carbon - Role management (http://wso2.org/org.wso2.carbon.identity.role.mgt.core) org.wso2.carbon.identity.framework:org.wso2.carbon.identity.role.mgt.core:bundle:5.19.53
     License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -349,7 +349,7 @@ From: 'WSO2' (http://www.wso2.org/)
 From: 'WSO2 Inc' (http://wso2.com)
   - WSO2 Carbon - JSR 107 API (http://wso2.org) org.wso2.carbon:javax.cache.wso2:bundle:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
-  - WSO2 Carbon - Default Authenticator Proxy (http://wso2.org) org.wso2.carbon:org.wso2.carbon.authenticator.proxy:bundle:4.6.2-m4
+  - WSO2 Carbon - Default Authenticator Proxy (http://wso2.org) org.wso2.carbon:org.wso2.carbon.authenticator.proxy:bundle:4.7.0-m3
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
   - WSO2 Carbon - Base (http://wso2.org) org.wso2.carbon:org.wso2.carbon.base:bundle:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
@@ -357,13 +357,13 @@ From: 'WSO2 Inc' (http://wso2.com)
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
   - WSO2 Carbon - Kernel (http://wso2.org) org.wso2.carbon:org.wso2.carbon.core:bundle:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
-  - WSO2 Carbon - Core Common (http://wso2.org) org.wso2.carbon:org.wso2.carbon.core.common:bundle:4.6.2-m4
+  - WSO2 Carbon - Core Common (http://wso2.org) org.wso2.carbon:org.wso2.carbon.core.common:bundle:4.7.0-m3
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
   - WSO2 Carbon - Queuing (http://wso2.org) org.wso2.carbon:org.wso2.carbon.queuing:bundle:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
   - WSO2 Carbon - Registry API (http://wso2.org/org.wso2.carbon.registry.api) org.wso2.carbon:org.wso2.carbon.registry.api:bundle:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
-  - WSO2 Carbon - Registry Kernel (http://wso2.org/org.wso2.carbon.registry.core) org.wso2.carbon:org.wso2.carbon.registry.core:bundle:4.6.2-m4
+  - WSO2 Carbon - Registry Kernel (http://wso2.org/org.wso2.carbon.registry.core) org.wso2.carbon:org.wso2.carbon.registry.core:bundle:4.7.0-m3
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
   - WSO2 Carbon - Xbootclasspath library for Registry Kernel (http://wso2.org) org.wso2.carbon:org.wso2.carbon.registry.xboot:jar:4.6.1
     License: Apache License Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)

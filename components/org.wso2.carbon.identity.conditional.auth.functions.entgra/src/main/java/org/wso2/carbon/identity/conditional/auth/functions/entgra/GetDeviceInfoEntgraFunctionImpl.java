@@ -68,15 +68,16 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
         try {
             JsAuthenticatedUser user = Util.getUser(context);
-            String tenantDomain = user == null ? "carbon.super" : user.getWrapped().getTenantDomain();
+            String tenantDomain = "carbon.super";
+            String username = user.getWrapped().getUserName();
 
             // Getting connector configurations
             String clientKey = CommonUtils.getConnectorConfig(Constants.CLIENT_KEY, tenantDomain);
             String clientSecret = CommonUtils.getConnectorConfig(Constants.CLIENT_SECRET, tenantDomain);
             String tokenURL = CommonUtils.getConnectorConfig(Constants.TOKEN_URL, tenantDomain);
             String deviceInfoBaseURL = CommonUtils.getConnectorConfig(Constants.DEVICE_INFO_URL, tenantDomain);
-            String username = CommonUtils.getConnectorConfig(Constants.USERNAME, tenantDomain);
-            String credential = CommonUtils.getConnectorConfig(Constants.CREDENTIAL, tenantDomain);
+            String entgraUserName = CommonUtils.getConnectorConfig(Constants.USERNAME, tenantDomain);
+            String entgraCredential = CommonUtils.getConnectorConfig(Constants.CREDENTIAL, tenantDomain);
             String deviceInfoURL = deviceInfoBaseURL + "/" + platformOS + "/" + deviceID;
 
             AsyncProcess asyncProcess = new AsyncProcess((authenticationContext, asyncReturn) -> {
@@ -84,7 +85,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 JSONObject response = null;
 
                 try {
-                    HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret, username, credential);
+                    HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret, entgraUserName, entgraCredential);
 
                     // For catching and logging error
                     String errorURL = tokenURL;
@@ -106,8 +107,15 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                 if (dResponseCode >= 200 && dResponseCode < 300) {
                                     String dJsonString = EntityUtils.toString(dResponse.getEntity());
                                     JSONObject jsonDeviceInfoResponse = (JSONObject) parser.parse(dJsonString);
-                                    response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
-                                    outcome = OUTCOME_SUCCESS;
+                                    String enrolledUser = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("owner");
+
+                                    // Check if the device is enrolled to current user
+                                    if (username.equalsIgnoreCase(enrolledUser)) {
+                                        response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
+                                        outcome = OUTCOME_SUCCESS;
+                                    } else {
+                                        outcome = OUTCOME_FAIL;
+                                    }
                                 } else {
 
                                     LOG.error("Error while fetching device information from Entgra Server. Response code: " + dResponseCode);

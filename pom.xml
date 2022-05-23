@@ -134,8 +134,7 @@
         <apache.commons.logging.imp.pkg.version>1.2</apache.commons.logging.imp.pkg.version>
         <carbon.kernel.package.import.version.range>[4.5.1, 5.0.0)</carbon.kernel.package.import.version.range>
         <imp.pkg.version.javax.servlet>[2.5.0, 3.0.0)</imp.pkg.version.javax.servlet>
-        <carbon.identity.framework.imp.pkg.version.range>[5.14.97, 6.0.0)
-        </carbon.identity.framework.imp.pkg.version.range>
+        <carbon.identity.framework.version>5.20.189</carbon.identity.framework.version>
         <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
         <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
         <carbon.identity.conditional.auth.functions.imp.pkg.version.range>[1.1.6, 2.0.0)
@@ -145,7 +144,6 @@
         <identity.governance.imp.pkg.version.range>[1.4.90, 2.0.0)</identity.governance.imp.pkg.version.range>
         <carbon.kernel.version>4.6.1</carbon.kernel.version>
         <identity.governance.version>1.4.95</identity.governance.version>
-        <carbon.identity.framework.version>5.19.58</carbon.identity.framework.version>
         <identity.governance.imp.pkg.version.range>[1.4.90, 2.0.0)</identity.governance.imp.pkg.version.range>
         <identity.governance.version>1.4.95</identity.governance.version>
         <identity.conditional.auth.functions.common.version>1.1.6</identity.conditional.auth.functions.common.version>
