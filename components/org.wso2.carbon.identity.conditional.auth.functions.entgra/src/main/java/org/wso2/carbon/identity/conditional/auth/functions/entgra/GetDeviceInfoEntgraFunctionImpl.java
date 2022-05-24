@@ -65,7 +65,6 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
     @Override
     public void getDeviceInfoEntgra(JsAuthenticationContext context, String platformOS, String deviceID, Map<String, Object> eventHandlers) throws EntgraConnectorException {
-
         try {
             JsAuthenticatedUser user = Util.getUser(context);
             String tenantDomain = "carbon.super";
@@ -108,13 +107,18 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                     String dJsonString = EntityUtils.toString(dResponse.getEntity());
                                     JSONObject jsonDeviceInfoResponse = (JSONObject) parser.parse(dJsonString);
                                     String enrolledUser = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("owner");
+                                    String enrollmentStatus = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("status");
 
                                     // Check if the device is enrolled to current user
-                                    if (username.equalsIgnoreCase(enrolledUser)) {
-                                        response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
+                                    if ("REMOVED".equals(enrollmentStatus)) {
+                                        outcome = OUTCOME_FAIL;
+                                        response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED, "Device is not enrolled");
+                                    } else if (username.equalsIgnoreCase(enrolledUser)) {
                                         outcome = OUTCOME_SUCCESS;
+                                        response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
                                     } else {
                                         outcome = OUTCOME_FAIL;
+                                        response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER, "Device is not enrolled under the current user");
                                     }
                                 } else {
 
@@ -125,6 +129,12 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                 errorURL = deviceInfoURL;
                                 throw e;
                             }
+
+                        } else if (tokenResponseCode == 404) {
+                            LOG.error("Error while requesting access token from Entgra Server. Response code: " + tokenResponseCode);
+                            outcome = OUTCOME_FAIL;
+                            response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED, "Device is not enrolled");
+
                         } else {
                             LOG.error("Error while requesting access token from Entgra Server. Response code: " + tokenResponseCode);
                             outcome = OUTCOME_FAIL;
@@ -148,6 +158,11 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 } catch (Exception e) {
                     outcome = OUTCOME_FAIL;
                     LOG.error("Error while generating request.");
+                }
+
+                // If outcome fails and response is null, set error object to response
+                if (outcome.equals(OUTCOME_FAIL) && response == null) {
+                    response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED, "Access Denied");
                 }
 
                 asyncReturn.accept(authenticationContext, response != null ? response : Collections.emptyMap(), outcome);
@@ -206,6 +221,19 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
         request.setHeader(AUTHORIZATION, "Bearer " + accessToken);
 
         return request;
+    }
+
+    /**
+     * Return Error Json Object
+     * @param errorCode
+     * @param errorMessage
+     * @return errorMap JSONObject
+     */
+    private JSONObject getErrorJsonObject(Constants.AuthResponseErrorCode errorCode, String errorMessage) {
+        JSONObject errorMap = new JSONObject();
+        errorMap.put("errorCode", errorCode);
+        errorMap.put("errorMessage", errorMessage);
+        return errorMap;
     }
 
 }

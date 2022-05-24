@@ -13,5 +13,13 @@ public abstract class Constants {
     public static final String TYPE_APPLICATION_JSON = "application/json";
     public static final String ACCESS_TOKEN = "access_token";
 
+    public static enum AuthResponseErrorCode {
+            ACCESS_DENIED,
+            DEVICE_NOT_ENROLLED,
+            DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER,
+            NETWORK_ERROR,
+            INTERNAL_SERVER_ERROR
+    }
+
 
 }
