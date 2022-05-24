@@ -21,7 +21,7 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
 
     public static final String DEFAULT_ENABLE = "true";
     public static final String DEFAULT_TOKEN_URL = "https://500.mgt.entgra.net/oauth/token";
-    public static final String DEFAULT_DEVICE_INFO_URL = "https://500.mgt.entgra.net/api/device-mgt/v1.0/devices/1.0.0";
+    public static final String DEFAULT_DEVICE_INFO_URL = "https://500.gw.entgra.net/api/device-mgt/v1.0/devices/1.0.0";
     public static final String DEFAULT_CLIENT_KEY = "change-me";
     public static final String DEFAULT_CLIENT_SECRET = "change-me";
     public static final String DEFAULT_USERNAME = "change-me";
