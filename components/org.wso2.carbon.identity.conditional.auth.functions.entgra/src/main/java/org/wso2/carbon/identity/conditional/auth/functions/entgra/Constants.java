@@ -6,8 +6,6 @@ public abstract class Constants {
     public static final String DEVICE_INFO_URL = "adaptive_authentication.entgra.device_info_url";
     public static final String CLIENT_KEY = "adaptive_authentication.entgra.client_key";
     public static final String CLIENT_SECRET = "adaptive_authentication.entgra.client_secret";
-    public static final String USERNAME = "adaptive_authentication.entgra.username";
-    public static final String CREDENTIAL = "__secret__adaptive_authentication.entgra.password";
 
     public static final String TYPE_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
     public static final String TYPE_APPLICATION_JSON = "application/json";

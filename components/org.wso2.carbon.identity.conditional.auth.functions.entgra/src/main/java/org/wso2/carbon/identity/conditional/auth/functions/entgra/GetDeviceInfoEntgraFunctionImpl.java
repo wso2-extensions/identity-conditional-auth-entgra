@@ -67,7 +67,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
     public void getDeviceInfoEntgra(JsAuthenticationContext context, String platformOS, String deviceID, Map<String, Object> eventHandlers) throws EntgraConnectorException {
         try {
             JsAuthenticatedUser user = Util.getUser(context);
-            String tenantDomain = "carbon.super";
+            String tenantDomain = user.getWrapped().getTenantDomain();
             String username = user.getWrapped().getUserName();
 
             // Getting connector configurations
@@ -75,8 +75,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
             String clientSecret = CommonUtils.getConnectorConfig(Constants.CLIENT_SECRET, tenantDomain);
             String tokenURL = CommonUtils.getConnectorConfig(Constants.TOKEN_URL, tenantDomain);
             String deviceInfoBaseURL = CommonUtils.getConnectorConfig(Constants.DEVICE_INFO_URL, tenantDomain);
-            String entgraUserName = CommonUtils.getConnectorConfig(Constants.USERNAME, tenantDomain);
-            String entgraCredential = CommonUtils.getConnectorConfig(Constants.CREDENTIAL, tenantDomain);
+
             String deviceInfoURL = deviceInfoBaseURL + "/" + platformOS + "/" + deviceID;
 
             AsyncProcess asyncProcess = new AsyncProcess((authenticationContext, asyncReturn) -> {
@@ -84,7 +83,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 JSONObject response = null;
 
                 try {
-                    HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret, entgraUserName, entgraCredential);
+                    HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret);
 
                     // For catching and logging error
                     String errorURL = tokenURL;
@@ -181,11 +180,9 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
      * @param tokenURL     Token endpoint of Entgra IoT server
      * @param clientKey    Client key given by SP of Entgra IoT server
      * @param clientSecret Client secret given by SP of Enthra IoT server
-     * @param username     Entgra IoT server's admin account username
-     * @param credential   Entgra IoT server's admin account password
      * @return HttpPost request
      */
-    private HttpPost getTokenRequest(String tokenURL, String clientKey, String clientSecret, String username, String credential) {
+    private HttpPost getTokenRequest(String tokenURL, String clientKey, String clientSecret) {
         HttpPost request = new HttpPost(tokenURL);
 
         // Creating basic authorization header value
@@ -198,9 +195,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
         // Setting request body for the token request
         List<NameValuePair> tokenRequestPayload = new ArrayList<>();
-        tokenRequestPayload.add(new BasicNameValuePair("grant_type", "password"));
-        tokenRequestPayload.add(new BasicNameValuePair("username", username));
-        tokenRequestPayload.add(new BasicNameValuePair("password", credential));
+        tokenRequestPayload.add(new BasicNameValuePair("grant_type", "client_credentials"));
         tokenRequestPayload.add(new BasicNameValuePair("scope", "default perm:devices:details perm:devices:view"));
 
         request.setEntity(new UrlEncodedFormEntity(tokenRequestPayload, StandardCharsets.UTF_8));
