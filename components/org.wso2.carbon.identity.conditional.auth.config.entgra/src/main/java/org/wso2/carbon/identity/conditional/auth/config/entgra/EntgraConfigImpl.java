@@ -1,4 +1,4 @@
-package org.wso2.carbon.identity.auth.connector.entgra;
+package org.wso2.carbon.identity.conditional.auth.config.entgra;
 
 import org.wso2.carbon.identity.governance.IdentityGovernanceException;
 import org.wso2.carbon.identity.governance.common.IdentityConnectorConfig;

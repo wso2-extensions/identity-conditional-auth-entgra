@@ -1,4 +1,4 @@
-package org.wso2.carbon.identity.auth.connector.entgra.internal;
+package org.wso2.carbon.identity.conditional.auth.config.entgra.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,7 +10,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
-import org.wso2.carbon.identity.auth.connector.entgra.EntgraConfigImpl;
+import org.wso2.carbon.identity.conditional.auth.config.entgra.EntgraConfigImpl;
 import org.wso2.carbon.identity.governance.IdentityGovernanceService;
 import org.wso2.carbon.identity.governance.common.IdentityConnectorConfig;
 import org.wso2.carbon.registry.core.service.RegistryService;

@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>org.wso2.carbon.identity.auth.connector.entgra</artifactId>
+    <artifactId>org.wso2.carbon.identity.conditional.auth.config.entgra</artifactId>
     <name>Identity Auth Connector - Entgra</name>
     <packaging>bundle</packaging>
 

@@ -1,4 +1,4 @@
-package org.wso2.carbon.identity.auth.connector.entgra.internal;
+package org.wso2.carbon.identity.conditional.auth.config.entgra.internal;
 
 import org.wso2.carbon.identity.application.authentication.framework.JsFunctionRegistry;
 import org.wso2.carbon.identity.governance.IdentityGovernanceService;
