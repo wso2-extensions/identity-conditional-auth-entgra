@@ -22,17 +22,18 @@ import org.wso2.carbon.identity.conditional.auth.functions.entgra.GetDeviceInfoE
         immediate = true
 )
 public class EntgraFunctionsServiceComponent {
-    private static final Log LOG = LogFactory.getLog(EntgraFunctionsServiceComponent.class);
 
-    public static final String FUNC_ENTGRA_GET_DEVICE_INFO = "getDeviceInfoEntgra";
+    private static final Log LOG = LogFactory.getLog(EntgraFunctionsServiceComponent.class);
+    public static final String FUNC_GET_DEVICE_INFO_ENTGRA = "getDeviceInfoEntgra";
 
     @Activate
     protected void activate(ComponentContext ctxt) {
+
         try {
             GetDeviceInfoEntgraFunction getDeviceInfoEntgraFunction = new GetDeviceInfoEntgraFunctionImpl();
 
             JsFunctionRegistry jsFunctionRegistry = EntgraFunctionsServiceHolder.getInstance().getJsFunctionRegistry();
-            jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_ENTGRA_GET_DEVICE_INFO,
+            jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_GET_DEVICE_INFO_ENTGRA,
                     getDeviceInfoEntgraFunction);
         } catch (Throwable e) {
             LOG.error("Error occurred during conditional authentication user functions bundle activation. ", e);
@@ -45,7 +46,7 @@ public class EntgraFunctionsServiceComponent {
 
         JsFunctionRegistry jsFunctionRegistry = EntgraFunctionsServiceHolder.getInstance().getJsFunctionRegistry();
         if (jsFunctionRegistry != null) {
-            jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_ENTGRA_GET_DEVICE_INFO);
+            jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, FUNC_GET_DEVICE_INFO_ENTGRA);
         }
     }
 

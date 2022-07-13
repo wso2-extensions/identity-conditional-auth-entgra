@@ -1,3 +1,22 @@
+
+/*
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package org.wso2.carbon.identity.conditional.auth.functions.entgra;
 
 import org.apache.commons.logging.Log;
@@ -50,6 +69,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
     private CloseableHttpClient client;
 
     public GetDeviceInfoEntgraFunctionImpl() {
+
         super();
         // Configure Http Client
         RequestConfig config = RequestConfig.custom()
@@ -64,7 +84,9 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
     }
 
     @Override
-    public void getDeviceInfoEntgra(JsAuthenticationContext context, String platformOS, String deviceID, Map<String, Object> eventHandlers) throws EntgraConnectorException {
+    public void getDeviceInfoEntgra(JsAuthenticationContext context, String platformOS, String deviceID,
+                                    Map<String, Object> eventHandlers) throws EntgraConnectorException {
+
         try {
             JsAuthenticatedUser user = Util.getUser(context);
             String tenantDomain = user.getWrapped().getTenantDomain();
@@ -183,6 +205,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
      * @return HttpPost request
      */
     private HttpPost getTokenRequest(String tokenURL, String clientKey, String clientSecret) {
+
         HttpPost request = new HttpPost(tokenURL);
 
         // Creating basic authorization header value
@@ -210,6 +233,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
      * @return HttpGet request
      */
     private HttpGet getDeviceInfoRequest(String deviceInfoURL, String accessToken) {
+
         HttpGet request = new HttpGet(deviceInfoURL);
 
         request.setHeader(ACCEPT, Constants.TYPE_APPLICATION_JSON);
@@ -225,6 +249,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
      * @return errorMap JSONObject
      */
     private JSONObject getErrorJsonObject(Constants.AuthResponseErrorCode errorCode, String errorMessage) {
+
         JSONObject errorMap = new JSONObject();
         errorMap.put("errorCode", errorCode);
         errorMap.put("errorMessage", errorMessage);
