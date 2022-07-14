@@ -102,11 +102,11 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>
-                            org.wso2.carbon.identity.auth.connector.entgra.internal
+                            org.wso2.carbon.identity.conditional.auth.config.entgra.internal
                         </Private-Package>
                         <Export-Package>
-                            !org.wso2.carbon.identity.auth.connector.entgra.internal,
-                            org.wso2.carbon.identity.auth.connector.entgra.*
+                            !org.wso2.carbon.identity.conditional.auth.config.entgra.internal,
+                            org.wso2.carbon.identity.conditional.auth.config.entgra.*
                         </Export-Package>
                         <Import-Package>
                             org.apache.commons.lang;version="${apache.commons.lang.imp.pkg.version}",
