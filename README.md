@@ -1,6 +1,5 @@
-# Entgra Connector and getDeviceInfoEntgra Conditional Auth Function
-
-## 
+# identity-conditional-auth-entgra
+This repository contains the modules related to Entgra conditional authentication.
 
 ## Building and Integrating the Extensions into the Identity Server.
 
