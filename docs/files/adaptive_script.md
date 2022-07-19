@@ -2,7 +2,7 @@
 
 ### Adaptive script parameters description
 
-`getDeviceInfoEntgra` function is used to verify if the current device registered under the current logged-in user 
+`getDeviceInfoEntgra` function is used to verify if the current device is registered under the current logged-in user 
 and returns the following parameters with data.
 
 
