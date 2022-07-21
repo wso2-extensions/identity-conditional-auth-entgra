@@ -41,11 +41,44 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     public static final String DEFAULT_CLIENT_KEY = "change-me";
     public static final String DEFAULT_CLIENT_SECRET = "change-me";
 
-    private static Map<String, String> mapping;
+    private static Map<String, String> propertyNameMapping;
+    private static Map<String, String> propertyDescriptionMapping;
+    private static Map<String, String> defaultPropertyValuesMapping;
+    private static List<String> propertyNames;
+    private static Properties defaultPropertyValues;
 
     static {
 
-        mapping = new HashMap<>();
+        propertyNameMapping = new HashMap<>();
+        propertyNameMapping.put(ENABLE, "Enable Entgra");
+        propertyNameMapping.put(TOKEN_URL, "Token URL");
+        propertyNameMapping.put(DEVICE_INFO_URL, "Device Information URL");
+        propertyNameMapping.put(CLIENT_KEY, "Client Key");
+        propertyNameMapping.put(CLIENT_SECRET, "Client Secret");
+
+        propertyDescriptionMapping = new HashMap<>();
+        propertyDescriptionMapping.put(ENABLE, "Enable Entgra Authentication");
+        propertyDescriptionMapping.put(TOKEN_URL, "Entgra Token URL");
+        propertyDescriptionMapping.put(DEVICE_INFO_URL, "Entgra Device Information URL");
+        propertyDescriptionMapping.put(CLIENT_KEY, "Entgra Client Key");
+        propertyDescriptionMapping.put(CLIENT_SECRET, "Entgra Client Secret");
+
+        propertyNames = new ArrayList<>();
+        propertyNames.add(ENABLE);
+        propertyNames.add(TOKEN_URL);
+        propertyNames.add(DEVICE_INFO_URL);
+        propertyNames.add(CLIENT_KEY);
+        propertyNames.add(CLIENT_SECRET);
+
+        defaultPropertyValuesMapping = new HashMap<>();
+        defaultPropertyValuesMapping.put(ENABLE, DEFAULT_ENABLE);
+        defaultPropertyValuesMapping.put(TOKEN_URL, DEFAULT_TOKEN_URL);
+        defaultPropertyValuesMapping.put(DEVICE_INFO_URL, DEFAULT_DEVICE_INFO_URL);
+        defaultPropertyValuesMapping.put(CLIENT_KEY, DEFAULT_CLIENT_KEY);
+        defaultPropertyValuesMapping.put(CLIENT_SECRET, DEFAULT_CLIENT_SECRET);
+
+        defaultPropertyValues = new Properties();
+        defaultPropertyValues.putAll(defaultPropertyValuesMapping);
     }
 
     @Override
@@ -81,55 +114,25 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     @Override
     public Map<String, String> getPropertyNameMapping() {
 
-        mapping.clear();
-        mapping.put(ENABLE, "Enable Entgra");
-        mapping.put(TOKEN_URL, "Token URL");
-        mapping.put(DEVICE_INFO_URL, "Device Information URL");
-        mapping.put(CLIENT_KEY, "Client Key");
-        mapping.put(CLIENT_SECRET, "Client Secret");
-
-        return mapping;
+        return propertyNameMapping;
     }
 
     @Override
     public Map<String, String> getPropertyDescriptionMapping() {
 
-        mapping.clear();
-        mapping.put(ENABLE, "Enable Entgra Authentication");
-        mapping.put(TOKEN_URL, "Entgra Token URL");
-        mapping.put(DEVICE_INFO_URL, "Entgra Device Information URL");
-        mapping.put(CLIENT_KEY, "Entgra Client Key");
-        mapping.put(CLIENT_SECRET, "Entgra Client Secret");
-
-        return mapping;
+        return propertyDescriptionMapping;
     }
 
     @Override
     public String[] getPropertyNames() {
 
-        List<String> properties = new ArrayList<>();
-        properties.add(ENABLE);
-        properties.add(TOKEN_URL);
-        properties.add(DEVICE_INFO_URL);
-        properties.add(CLIENT_KEY);
-        properties.add(CLIENT_SECRET);
-
-        return properties.toArray(new String[0]);
+        return propertyNames.toArray(new String[0]);
     }
 
     @Override
     public Properties getDefaultPropertyValues(String s) throws IdentityGovernanceException {
 
-        mapping.clear();
-        mapping.put(ENABLE, DEFAULT_ENABLE);
-        mapping.put(TOKEN_URL, DEFAULT_TOKEN_URL);
-        mapping.put(DEVICE_INFO_URL, DEFAULT_DEVICE_INFO_URL);
-        mapping.put(CLIENT_KEY, DEFAULT_CLIENT_KEY);
-        mapping.put(CLIENT_SECRET, DEFAULT_CLIENT_SECRET);
-
-        Properties properties = new Properties();
-        properties.putAll(mapping);
-        return properties;
+        return defaultPropertyValues;
     }
 
     @Override
