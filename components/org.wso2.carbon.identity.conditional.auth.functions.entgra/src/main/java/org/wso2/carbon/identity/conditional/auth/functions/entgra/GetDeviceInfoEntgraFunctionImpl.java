@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -46,7 +45,7 @@ import org.wso2.carbon.identity.conditional.auth.functions.common.utils.ConfigPr
 import org.wso2.carbon.identity.conditional.auth.functions.entgra.exception.EntgraConnectorException;
 import org.wso2.carbon.identity.event.IdentityEventException;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -55,13 +54,15 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Base64;
 
-import static org.apache.http.HttpHeaders.*;
+import static org.apache.http.HttpHeaders.CONTENT_TYPE;
+import static org.apache.http.HttpHeaders.AUTHORIZATION;
+import static org.apache.http.HttpHeaders.ACCEPT;
 import static org.wso2.carbon.identity.conditional.auth.functions.common.utils.Constants.OUTCOME_SUCCESS;
 import static org.wso2.carbon.identity.conditional.auth.functions.common.utils.Constants.OUTCOME_FAIL;
 import static org.wso2.carbon.identity.conditional.auth.functions.common.utils.Constants.OUTCOME_TIMEOUT;
 
 /**
- * Implementation of the {@link GetDeviceInfoEntgraFunction}
+ * Implementation of the {@link GetDeviceInfoEntgraFunction}.
  */
 public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunction {
 
@@ -70,8 +71,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
     public GetDeviceInfoEntgraFunctionImpl() {
 
-        super();
-        // Configure Http Client
+        // Configure http client.
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(ConfigProvider.getInstance().getConnectionTimeout())
                 .setConnectionRequestTimeout(ConfigProvider.getInstance().getConnectionRequestTimeout())
@@ -92,7 +92,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
             String tenantDomain = user.getWrapped().getTenantDomain();
             String username = user.getWrapped().getUserName();
 
-            // Getting connector configurations
+            // Getting connector configurations.
             String clientKey = CommonUtils.getConnectorConfig(Constants.CLIENT_KEY, tenantDomain);
             String clientSecret = CommonUtils.getConnectorConfig(Constants.CLIENT_SECRET, tenantDomain);
             String tokenURL = CommonUtils.getConnectorConfig(Constants.TOKEN_URL, tenantDomain);
@@ -107,7 +107,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 try {
                     HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret);
 
-                    // For catching and logging error
+                    // For catching and logging errors.
                     String errorURL = tokenURL;
                     try (CloseableHttpResponse tResponse = client.execute(tokenRequest)) {
                         int tokenResponseCode = tResponse.getStatusLine().getStatusCode();
@@ -120,7 +120,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
                             HttpGet deviceInfoRequest = getDeviceInfoRequest(deviceInfoURL, accessToken);
 
-                            tResponse.close(); // Closing the CloseableHttpResponse before starting new one
+                            tResponse.close();
                             try (CloseableHttpResponse dResponse = client.execute(deviceInfoRequest)) {
                                 int dResponseCode = dResponse.getStatusLine().getStatusCode();
 
@@ -130,7 +130,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                     String enrolledUser = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("owner");
                                     String enrollmentStatus = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("status");
 
-                                    // Check if the device is enrolled to current user
+                                    // Check if the device is enrolled to current user.
                                     if ("REMOVED".equals(enrollmentStatus)) {
                                         outcome = OUTCOME_FAIL;
                                         response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED, "Device is not recognized. Please register your device.");
@@ -181,7 +181,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                     LOG.error("Error while generating request.");
                 }
 
-                // If outcome fails and response is null, set error object as response
+                // If outcome fails and response is null, set error object as response.
                 if (outcome.equals(OUTCOME_FAIL) && response == null) {
                     response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED, "Access is denied. Please contact your administrator.");
                 }
@@ -189,15 +189,13 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 asyncReturn.accept(authenticationContext, response != null ? response : Collections.emptyMap(), outcome);
             });
             JsGraphBuilder.addLongWaitProcess(asyncProcess, eventHandlers);
-
         } catch (IdentityEventException e) {
             throw new EntgraConnectorException("Can not retrieve configurations from tenant.", e);
         }
-
     }
 
     /**
-     * Return http request for authorization token
+     * Return http request for requesting authorization token.
      *
      * @param tokenURL     Token endpoint of Entgra IoT server
      * @param clientKey    Client key given by SP of Entgra IoT server
@@ -208,15 +206,15 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
         HttpPost request = new HttpPost(tokenURL);
 
-        // Creating basic authorization header value
+        // Creating basic authorization header value.
         String basicAuthString = clientKey + ":" + clientSecret;
         String tokenRequestAuthorizationHeader = "Basic " + Base64.getEncoder().encodeToString(basicAuthString.getBytes(StandardCharsets.UTF_8));
 
-        // Setting request headers for token request
+        // Setting request headers for token request.
         request.setHeader(CONTENT_TYPE, Constants.TYPE_APPLICATION_FORM_URLENCODED);
         request.setHeader(AUTHORIZATION, tokenRequestAuthorizationHeader);
 
-        // Setting request body for the token request
+        // Setting request body for the token request.
         List<NameValuePair> tokenRequestPayload = new ArrayList<>();
         tokenRequestPayload.add(new BasicNameValuePair("grant_type", "client_credentials"));
         tokenRequestPayload.add(new BasicNameValuePair("scope", "default perm:devices:details perm:devices:view"));
@@ -226,7 +224,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
     }
 
     /**
-     * Return http request for device information fetching
+     * Return http request for fetching device information.
      *
      * @param deviceInfoURL Device information fetching endpoint of Entgra IoT Server
      * @param accessToken   Access token received by the Entgra IoT server
@@ -243,7 +241,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
     }
 
     /**
-     * Return Error Json Object
+     * Return error json object.
      * @param errorCode
      * @param errorMessage
      * @return errorMap JSONObject
@@ -255,5 +253,4 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
         errorMap.put("errorMessage", errorMessage);
         return errorMap;
     }
-
 }

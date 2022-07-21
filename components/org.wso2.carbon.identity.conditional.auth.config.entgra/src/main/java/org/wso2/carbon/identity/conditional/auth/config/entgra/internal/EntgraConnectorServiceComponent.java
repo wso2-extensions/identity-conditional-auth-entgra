@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -36,14 +35,12 @@ import org.wso2.carbon.registry.core.service.RegistryService;
 import org.wso2.carbon.user.core.service.RealmService;
 
 /**
- * OSGI declarative services component which handle Entgra Connector
+ * OSGI declarative services component which handle Entgra connector.
  */
-
 @Component(
     name = "identity.auth.connector.entgra",
     immediate = true
 )
-
 public class EntgraConnectorServiceComponent {
 
     private static final Log LOG = LogFactory.getLog(EntgraConnectorServiceComponent.class);
@@ -55,7 +52,6 @@ public class EntgraConnectorServiceComponent {
             BundleContext bundleContext = ctxt.getBundleContext();
             EntgraConfigImpl entgraFunctionConfig = new EntgraConfigImpl();
             bundleContext.registerService(IdentityConnectorConfig.class.getName(), entgraFunctionConfig, null);
-
         } catch (Throwable e) {
             LOG.error("Error while activating Entgra Connector", e);
         }
@@ -135,5 +131,4 @@ public class EntgraConnectorServiceComponent {
         }
         EntgraConnectorServiceHolder.getInstance().setIdentityGovernanceService(null);
     }
-
 }

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -45,5 +44,4 @@ public class EntgraFunctionsServiceHolder {
 
         this.jsFunctionRegistry = jsFunctionRegistry;
     }
-
 }

@@ -10,4 +10,3 @@ device is in an unsecured state.
 * To get started with the Entgra conditional authentication function, Go to [configuring Entgra conditional 
   authentication](files/config.md).
 * To see the Entgra adaptive authentication script documentation, Click [here](files/adaptive_script.md).
-

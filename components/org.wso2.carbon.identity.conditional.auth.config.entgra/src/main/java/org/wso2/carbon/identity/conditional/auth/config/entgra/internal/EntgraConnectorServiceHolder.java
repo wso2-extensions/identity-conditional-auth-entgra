@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -26,7 +25,7 @@ import org.wso2.carbon.user.core.service.RealmService;
 
 public class EntgraConnectorServiceHolder {
 
-    public static EntgraConnectorServiceHolder instance = new EntgraConnectorServiceHolder();
+    private static EntgraConnectorServiceHolder instance = new EntgraConnectorServiceHolder();
 
     private RealmService realmService;
     private RegistryService registryService;

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -37,10 +36,17 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     public static final String CLIENT_SECRET = "adaptive_authentication.entgra.client_secret";
 
     public static final String DEFAULT_ENABLE = "true";
-    public static final String DEFAULT_TOKEN_URL = "https://500.mgt.entgra.net/oauth/token";
+    public static final String DEFAULT_TOKEN_URL = "https://500.mgt.entgra.net/oauth2/token";
     public static final String DEFAULT_DEVICE_INFO_URL = "https://500.gw.entgra.net/api/device-mgt/v1.0/devices/1.0.0";
     public static final String DEFAULT_CLIENT_KEY = "change-me";
     public static final String DEFAULT_CLIENT_SECRET = "change-me";
+
+    private static Map<String, String> mapping;
+
+    static {
+
+        mapping = new HashMap<>();
+    }
 
     @Override
     public String getName() {
@@ -75,8 +81,7 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     @Override
     public Map<String, String> getPropertyNameMapping() {
 
-        Map<String, String> mapping = new HashMap<>();
-
+        mapping.clear();
         mapping.put(ENABLE, "Enable Entgra");
         mapping.put(TOKEN_URL, "Token URL");
         mapping.put(DEVICE_INFO_URL, "Device Information URL");
@@ -89,8 +94,7 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     @Override
     public Map<String, String> getPropertyDescriptionMapping() {
 
-        Map<String, String> mapping = new HashMap<>();
-
+        mapping.clear();
         mapping.put(ENABLE, "Enable Entgra Authentication");
         mapping.put(TOKEN_URL, "Entgra Token URL");
         mapping.put(DEVICE_INFO_URL, "Entgra Device Information URL");
@@ -116,15 +120,15 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
     @Override
     public Properties getDefaultPropertyValues(String s) throws IdentityGovernanceException {
 
-        Map<String, String> defaultProperties = new HashMap<>();
-        defaultProperties.put(ENABLE, DEFAULT_ENABLE);
-        defaultProperties.put(TOKEN_URL, DEFAULT_TOKEN_URL);
-        defaultProperties.put(DEVICE_INFO_URL, DEFAULT_DEVICE_INFO_URL);
-        defaultProperties.put(CLIENT_KEY, DEFAULT_CLIENT_KEY);
-        defaultProperties.put(CLIENT_SECRET, DEFAULT_CLIENT_SECRET);
+        mapping.clear();
+        mapping.put(ENABLE, DEFAULT_ENABLE);
+        mapping.put(TOKEN_URL, DEFAULT_TOKEN_URL);
+        mapping.put(DEVICE_INFO_URL, DEFAULT_DEVICE_INFO_URL);
+        mapping.put(CLIENT_KEY, DEFAULT_CLIENT_KEY);
+        mapping.put(CLIENT_SECRET, DEFAULT_CLIENT_SECRET);
 
         Properties properties = new Properties();
-        properties.putAll(defaultProperties);
+        properties.putAll(mapping);
         return properties;
     }
 
@@ -133,6 +137,4 @@ public class EntgraConfigImpl implements IdentityConnectorConfig {
 
         return null;
     }
-
-
 }

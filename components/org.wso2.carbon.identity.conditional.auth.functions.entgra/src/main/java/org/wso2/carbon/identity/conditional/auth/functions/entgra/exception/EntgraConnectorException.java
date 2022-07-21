@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -20,7 +19,7 @@
 package org.wso2.carbon.identity.conditional.auth.functions.entgra.exception;
 
 /**
- * Custom Exception for Entgra Connector
+ * Custom exception for Entgra Connector.
  */
 public class EntgraConnectorException extends Exception {
 

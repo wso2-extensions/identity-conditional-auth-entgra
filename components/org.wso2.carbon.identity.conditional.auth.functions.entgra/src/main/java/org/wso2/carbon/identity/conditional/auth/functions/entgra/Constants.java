@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -20,7 +19,8 @@
 package org.wso2.carbon.identity.conditional.auth.functions.entgra;
 
 public abstract class Constants {
-    // Connector configurations constants
+
+    // Connector configurations constants.
     public static final String TOKEN_URL = "adaptive_authentication.entgra.token_url";
     public static final String DEVICE_INFO_URL = "adaptive_authentication.entgra.device_info_url";
     public static final String CLIENT_KEY = "adaptive_authentication.entgra.client_key";
@@ -37,6 +37,4 @@ public abstract class Constants {
             NETWORK_ERROR,
             INTERNAL_SERVER_ERROR
     }
-
-
 }

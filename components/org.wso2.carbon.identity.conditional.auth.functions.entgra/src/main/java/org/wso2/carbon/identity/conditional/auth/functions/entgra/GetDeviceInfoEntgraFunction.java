@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.com).
  *
@@ -25,13 +24,13 @@ import org.wso2.carbon.identity.conditional.auth.functions.entgra.exception.Entg
 import java.util.Map;
 
 /**
- * Function to get device information from Entgra IoT server
+ * Function to get device information from Entgra IoT server.
  */
 @FunctionalInterface
 public interface GetDeviceInfoEntgraFunction {
 
     /**
-     * Get device information from Entgra IoT server
+     * Get device information from Entgra IoT server.
      * @param context       Context from authentication flow
      * @param osPlatform    Device's operating system
      * @param deviceID      Device identifier
