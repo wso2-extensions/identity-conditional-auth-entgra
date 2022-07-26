@@ -127,23 +127,31 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                 if (dResponseCode >= 200 && dResponseCode < 300) {
                                     String dJsonString = EntityUtils.toString(dResponse.getEntity());
                                     JSONObject jsonDeviceInfoResponse = (JSONObject) parser.parse(dJsonString);
-                                    String enrolledUser = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("owner");
-                                    String enrollmentStatus = (String) ((JSONObject) jsonDeviceInfoResponse.get("enrolmentInfo")).get("status");
+                                    String enrolledUser = (String) ((JSONObject) jsonDeviceInfoResponse
+                                            .get("enrolmentInfo")).get("owner");
+                                    String enrollmentStatus = (String) ((JSONObject) jsonDeviceInfoResponse
+                                            .get("enrolmentInfo")).get("status");
 
                                     // Check if the device is enrolled to current user.
                                     if ("REMOVED".equals(enrollmentStatus)) {
                                         outcome = OUTCOME_FAIL;
-                                        response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED, "Device is not recognized. Please register your device.");
+                                        response = getErrorJsonObject(
+                                                Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
+                                                "Device is not recognized. Please register your device.");
                                     } else if (username.equalsIgnoreCase(enrolledUser)) {
                                         outcome = OUTCOME_SUCCESS;
-                                        response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo")).get("deviceDetailsMap");
+                                        response = (JSONObject) ((JSONObject) jsonDeviceInfoResponse.get("deviceInfo"))
+                                                .get("deviceDetailsMap");
                                     } else {
                                         outcome = OUTCOME_FAIL;
-                                        response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER, "Access is denied. Please contact your administrator.");
+                                        response = getErrorJsonObject(
+                                                Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER,
+                                                "Access is denied. Please contact your administrator.");
                                     }
                                 } else {
 
-                                    LOG.error("Error while fetching device information from Entgra Server. Response code: " + dResponseCode);
+                                    LOG.error("Error while fetching device information from Entgra Server. " +
+                                            "Response code: " + dResponseCode);
                                     outcome = OUTCOME_FAIL;
                                 }
                             } catch (Exception e) {
@@ -152,12 +160,15 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                             }
 
                         } else if (tokenResponseCode == 404) {
-                            LOG.error("Error while requesting access token from Entgra Server. Response code: " + tokenResponseCode);
+                            LOG.error("Error while requesting access token from Entgra Server. Response code: "
+                                    + tokenResponseCode);
                             outcome = OUTCOME_FAIL;
-                            response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED, "Device is not recognized. Please register your device.");
+                            response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
+                                    "Device is not recognized. Please register your device.");
 
                         } else {
-                            LOG.error("Error while requesting access token from Entgra Server. Response code: " + tokenResponseCode);
+                            LOG.error("Error while requesting access token from Entgra Server. Response code: "
+                                    + tokenResponseCode);
                             outcome = OUTCOME_FAIL;
                         }
                     } catch (IllegalArgumentException e) {
@@ -183,10 +194,12 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
                 // If outcome fails and response is null, set error object as response.
                 if (outcome.equals(OUTCOME_FAIL) && response == null) {
-                    response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED, "Access is denied. Please contact your administrator.");
+                    response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED,
+                            "Access is denied. Please contact your administrator.");
                 }
 
-                asyncReturn.accept(authenticationContext, response != null ? response : Collections.emptyMap(), outcome);
+                asyncReturn.accept(authenticationContext,
+                        response != null ? response : Collections.emptyMap(), outcome);
             });
             JsGraphBuilder.addLongWaitProcess(asyncProcess, eventHandlers);
         } catch (IdentityEventException e) {
@@ -208,7 +221,8 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
         // Creating basic authorization header value.
         String basicAuthString = clientKey + ":" + clientSecret;
-        String tokenRequestAuthorizationHeader = "Basic " + Base64.getEncoder().encodeToString(basicAuthString.getBytes(StandardCharsets.UTF_8));
+        String tokenRequestAuthorizationHeader = "Basic " + Base64.getEncoder().encodeToString(basicAuthString
+                .getBytes(StandardCharsets.UTF_8));
 
         // Setting request headers for token request.
         request.setHeader(CONTENT_TYPE, Constants.TYPE_APPLICATION_FORM_URLENCODED);
@@ -217,7 +231,8 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
         // Setting request body for the token request.
         List<NameValuePair> tokenRequestPayload = new ArrayList<>();
         tokenRequestPayload.add(new BasicNameValuePair("grant_type", "client_credentials"));
-        tokenRequestPayload.add(new BasicNameValuePair("scope", "default perm:devices:details perm:devices:view"));
+        tokenRequestPayload.add(new BasicNameValuePair("scope",
+                "default perm:devices:details perm:devices:view"));
 
         request.setEntity(new UrlEncodedFormEntity(tokenRequestPayload, StandardCharsets.UTF_8));
         return request;
