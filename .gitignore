@@ -1,11 +1,14 @@
+.classpath
+.settings
+.project
+*.iml
+*.iws
+*.ipr
+.idea
+.DS_Store
+
 # Compiled class file
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -19,5 +22,16 @@
 *.tar.gz
 *.rar
 
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Ignore everything in this directory
+target
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
