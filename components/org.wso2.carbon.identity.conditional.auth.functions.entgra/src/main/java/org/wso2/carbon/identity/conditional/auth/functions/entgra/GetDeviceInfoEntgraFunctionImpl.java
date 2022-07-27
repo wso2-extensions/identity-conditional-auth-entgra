@@ -233,7 +233,6 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
         tokenRequestPayload.add(new BasicNameValuePair("grant_type", "client_credentials"));
         tokenRequestPayload.add(new BasicNameValuePair("scope",
                 "default perm:devices:details perm:devices:view"));
-
         request.setEntity(new UrlEncodedFormEntity(tokenRequestPayload, StandardCharsets.UTF_8));
         return request;
     }
@@ -251,7 +250,6 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
         request.setHeader(ACCEPT, Constants.TYPE_APPLICATION_JSON);
         request.setHeader(AUTHORIZATION, "Bearer " + accessToken);
-
         return request;
     }
 
