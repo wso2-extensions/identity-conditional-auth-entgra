@@ -34,7 +34,5 @@ public abstract class Constants {
             ACCESS_DENIED,
             DEVICE_NOT_ENROLLED,
             DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER,
-            NETWORK_ERROR,
-            INTERNAL_SERVER_ERROR
     }
 }
