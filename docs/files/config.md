@@ -1,24 +1,24 @@
 ## Configuring the WSO2 Identity server
 
 1. If you haven’t downloaded WSO2 Identity server yet, please visit [https://wso2.com/identity-server/](https://wso2.
-   com/identity-server/) and download the latest version of the Identity Server. </br></br>
+   com/identity-server/) and download the latest version of the Identity Server. 
 
 2. Go to [https://github.com/PasinduYeshan/identity-auth-entgra](https://github.
    com/PasinduYeshan/identity-auth-entgra) and follow exact steps to add Entgra connector and conditional 
-   authentication function to WSO2 Identity Server. </br></br> 
+   authentication function to WSO2 Identity Server.  
 
 3. Start the WSO2 Identity server.  Login to WSO2 IS management console from [http://localhost:9443/carbon]
-(http://localhost:9443/carbon)/ and navigate to **Service Providers** tab listed under the Identity section. </br></br>
+(http://localhost:9443/carbon)/ and navigate to **Service Providers** tab listed under the Identity section. 
 
-4. Click Add to add a new service provider. </br></br>
+4. Click Add to add a new service provider. 
 
 5. Provide a name for the service provider (ex:- ISEntgra) and click **Register**. Now you will be redirected to the 
-   **Edit Service Provider** page. </br></br>
+   **Edit Service Provider** page. 
 
 6. Expand the **Inbound Authentication Configuration** section and click **Configure** under the **OAuth/OpenID 
-   Connect Configuration** section. </br></br>
+   Connect Configuration** section. 
 
-7. Under **Allowed Grant Types** uncheck everything except `Code` and `Refresh Token`. </br></br>
+7. Under **Allowed Grant Types** uncheck everything except `Code` and `Refresh Token`. 
 
 8. Enter Callback URL(s) as for the following values.
 
@@ -29,12 +29,12 @@
 
 9. Once the configurations are added, you will be redirected to the **Service Provider Details**
    page. Here, expand the **Inbound Authentication Configuration** section and click on the **OAuth/OpenID 
-   Connect Configuration**. Copy the value of `OAuth Client Key` shown here. </br></br>
+   Connect Configuration**. Copy the value of `OAuth Client Key` shown here. 
 
-    ![Screen Shot 2022-05-30 at 1.03.15 PM.png](https://user-images.githubusercontent.com/61885844/171583227-e957efec-df32-4728-af18-004929481cfa.png) </br></br>
+    ![Screen Shot 2022-05-30 at 1.03.15 PM.png](https://user-images.githubusercontent.com/61885844/171583227-e957efec-df32-4728-af18-004929481cfa.png) 
 
 10. Expand the **Local & Outbound Authentication Configuration** section and select **Advanced Configuration,** Now 
-    you will be redirected to **Advanced Authentication Configuration** page. </br></br>
+    you will be redirected to **Advanced Authentication Configuration** page. 
 
 11. Expand **Script Based Adaptive Authentication** section and paste following code and edit according to your 
     needs.
@@ -80,10 +80,10 @@
    ![Screen Shot 2022-05-30 at 1.33.19 PM.png](https://user-images.githubusercontent.com/61885844/171583623-45b674e7-5fc9-4156-9f4e-2cf2640a243e.png)
 
 13. Make sure to click the `Update` button to save the changes. Now you will be redirected **Service Providers** page 
-   and make sure to click the `Update` button on the bottom to save all the changes. </br></br>
+   and make sure to click the `Update` button on the bottom to save all the changes. 
 
 14. Navigate to **Identity Providers** tab listed under the Identity section. Click on **Resident** button and, you 
-    will be redirected to **Resident Realm Configuration.** </br></br>
+    will be redirected to **Resident Realm Configuration.** 
 
 15. Expand **Other Settings** and add the following configurations under **Entgra Configurations**.
 
