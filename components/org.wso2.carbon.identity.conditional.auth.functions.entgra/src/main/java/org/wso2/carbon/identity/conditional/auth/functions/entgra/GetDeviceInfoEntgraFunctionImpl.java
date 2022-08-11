@@ -148,8 +148,11 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                                 Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER,
                                                 "Access is denied. Please contact your administrator.");
                                     }
+                                } else if (dResponseCode == 404) {
+                                    outcome = OUTCOME_FAIL;
+                                    response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
+                                            "Device is not recognized. Please register your device.");
                                 } else {
-
                                     LOG.error("Error while fetching device information from Entgra Server. " +
                                             "Response code: " + dResponseCode);
                                     outcome = OUTCOME_FAIL;
@@ -158,14 +161,6 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                 errorURL = deviceInfoURL;
                                 throw e;
                             }
-
-                        } else if (tokenResponseCode == 404) {
-                            LOG.error("Error while requesting access token from Entgra Server. Response code: "
-                                    + tokenResponseCode);
-                            outcome = OUTCOME_FAIL;
-                            response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
-                                    "Device is not recognized. Please register your device.");
-
                         } else {
                             LOG.error("Error while requesting access token from Entgra Server. Response code: "
                                     + tokenResponseCode);
