@@ -1,14 +1,10 @@
 ## Configuring the WSO2 Identity server
 
-1. If you haven’t downloaded WSO2 Identity server yet, please visit [https://wso2.com/identity-server/](https://wso2.
-   com/identity-server/) and download the latest version of the Identity Server. 
+1. If you haven’t downloaded WSO2 Identity server yet, please visit [https://wso2.com/identity-server/](https://wso2.com/identity-server) and download the latest version of the Identity Server. 
 
-2. Go to [https://github.com/PasinduYeshan/identity-auth-entgra](https://github.
-   com/PasinduYeshan/identity-auth-entgra) and follow exact steps to add Entgra connector and conditional 
-   authentication function to WSO2 Identity Server.  
+2. Go to [https://github.com/PasinduYeshan/identity-auth-entgra](https://github.com/PasinduYeshan/identity-auth-entgra) and follow exact steps to add Entgra connector and conditional authentication function to WSO2 Identity Server.  
 
-3. Start the WSO2 Identity server.  Login to WSO2 IS management console from [http://localhost:9443/carbon]
-(http://localhost:9443/carbon)/ and navigate to **Service Providers** tab listed under the Identity section. 
+3. Start the WSO2 Identity server.  Login to WSO2 IS management console from [http://localhost:9443/carbon](http://localhost:9443/carbon) and navigate to **Service Providers** tab listed under the Identity section. 
 
 4. Click Add to add a new service provider. 
 
@@ -18,14 +14,11 @@
 6. Expand the **Inbound Authentication Configuration** section and click **Configure** under the **OAuth/OpenID 
    Connect Configuration** section. 
 
-7. Under **Allowed Grant Types** uncheck everything except `Code` and `Refresh Token`. 
-
 8. Enter Callback URL(s) as for the following values.
 
    Callback Url: `wso2entgra://oauth2`
 
-   > Alternatively if you’re running in an emulator, you can use `http://10.0.2.2:8081` as the 
-   > callback url.
+   > Alternatively if you’re running in an emulator, you can use `http://10.0.2.2:8081` as the callback url.
 
 9. Once the configurations are added, you will be redirected to the **Service Provider Details**
    page. Here, expand the **Inbound Authentication Configuration** section and click on the **OAuth/OpenID 
@@ -43,26 +36,26 @@
     var onLoginRequest = function(context) {
         deviceID = context.request.params.deviceID[0];
         platformOS = context.request.params.platformOS[0];
-                executeStep(1, {
-                    onSuccess : function (context) {
-                        getDeviceInfoEntgra(context, platformOS, deviceID, {
-                           onSuccess : function (context, deviceInfo) {
-                                if (deviceInfo) {
-                                    if(deviceInfo.IS_DEV_MODE == "true") {
-                                        executeStep(2);
-                                    }
-                                }
-                               },
-                            onFail : function (context, error) {
-                                var errorMap = {
-                                    "errorCode": error.errorCode,
-                                    "errorMessage" : error.errorMessage
-                                };
-                                fail(errorMap);
+        executeStep(1, {
+            onSuccess : function (context) {
+                getDeviceInfoEntgra(context, platformOS, deviceID, {
+                    onSuccess : function (context, deviceInfo) {
+                        if (deviceInfo) {
+                            if(deviceInfo.IS_DEV_MODE == "true") {
+                                executeStep(2);
                             }
-                        });
+                        }
+                    },
+                    onFail : function (context, error) {
+                        var errorMap = {
+                            "errorCode": error.errorCode,
+                            "errorMessage" : error.errorMessage
+                        };
+                        fail(errorMap);
                     }
-                }); 
+                });
+            }
+        }); 
     };
     ```
 
@@ -72,10 +65,10 @@
    > 2. Device is rooted :- deviceInfo.ROOTED
    > 3. ADB enabled :- deviceInfo.IS_ADB
    
-   To see the Entgra adaptive authentication script documentation, Click [here](files/adaptive_script.md).
+   To see the Entgra adaptive authentication script documentation, Click [here](adaptive_script.md).
 
 12. Expand the **Authentication Step Configuration** and click on **Add Authentication Step**  button make sure to 
-    mark **Use subject identifier from this step** and **Use attributes from this step**. Then under **Local Authenticators** select an option and click on **Add authenticator** button. According to the above code there should be two authentication steps, therefore add another authentication steps and do not mark **Use subject identifier from this step** and **Use attributes from this step** options in this step.
+    mark **Use subject identifier from this step** and **Use attributes from this step**. Then under **Local Authenticators** select an option and click on **Add authenticator** button. According to the above code there should be two authentication steps, therefore add another authentication step and do not mark **Use subject identifier from this step** and **Use attributes from this step** options in this step.
 
    ![Screen Shot 2022-05-30 at 1.33.19 PM.png](https://user-images.githubusercontent.com/61885844/171583623-45b674e7-5fc9-4156-9f4e-2cf2640a243e.png)
 
