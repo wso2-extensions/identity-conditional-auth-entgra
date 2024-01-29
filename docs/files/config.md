@@ -7,15 +7,12 @@
 
 2. **Create and Configure a New Application**:
     - In the WSO2 IS console, navigate to the **Application** section and click on the *New Application* button.
-    - Choose **Standard-Based Application**.
-    - Provide a name for the application (e.g., ISEntgra), select **OAuth2.0 OpenID Connect** as the protocol, 
-   and click **Register**. You will be redirected to the **Protocol** section of the created application.
-        - <img src="../images/img_2.png" alt="Application Creation" width="450"/>
-    - In the **Protocol** section, enable the **Code** grant type and enter `wso2entgra://oauth2` as the Authorized 
-   Redirect URIs. 
+    - Choose **Mobile Application** template.
+    - Provide a name for the application (e.g., ISEntgra), enter `wso2entgra://oauth2` as the Authorized
+      Redirect URIs, and click **Register**. You will be redirected to the **Protocol** section of the created application.
    > When configuring the callback URL for testing in an Android emulator, use `http://10.0.2.2:8081`. This special
    > IP address is used by Android emulators to access the localhost (`127.0.0.1`) of your development machine.
-    - <img src="../images/img_3.png" alt="Application Protocol" width="600"/>
+    - In the **Protocol** section, make sure the **Code** grant type is enabled.
     - Under **Allowed Origins**, input the same URIs as the Redirect URIs and click **Update**.
     - Copy down the Client ID and Client Secret of the application.
     - Navigate to the **Sign-in Method** section.
