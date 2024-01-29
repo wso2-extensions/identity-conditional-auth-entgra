@@ -38,4 +38,4 @@
 Connect (OIDC), follow the detailed instructions provided [here](https://entgra.io/tag/asgardeo/). Remember to 
 adjust the endpoint URLs as needed to match your specific configuration.
 
-[Back to Previous Page](../README.md)
+[Back to Getting started Page](../README.md)

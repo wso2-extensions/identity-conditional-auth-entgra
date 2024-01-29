@@ -49,4 +49,4 @@ var onLoginRequest = function(context) {
 };
 ```
 
-[Back to Previous Page](../README.md)
+[Back to Getting started Page](../README.md)
