@@ -29,14 +29,14 @@
 
     <groupId>org.wso2.carbon.identity.conditional.auth.entgra</groupId>
     <artifactId>identity-conditional-auth-entgra</artifactId>
-    <version>0.0.1273</version>
+    <version>0.0.1274-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <scm>
         <url>https://github.com/wso2-extensions/identity-conditional-auth-entgra.git</url>
         <developerConnection>scm:git:https://github.com/wso2-extensions/identity-conditional-auth-entgra.git</developerConnection>
         <connection>scm:git:https://github.com/wso2-extensions/identity-conditional-auth-entgra.git</connection>
-        <tag>v0.0.1273</tag>
+        <tag>HEAD</tag>
     </scm>
   
     <modules>
