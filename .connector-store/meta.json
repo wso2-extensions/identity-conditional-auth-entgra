@@ -1,0 +1,12 @@
+{
+    "name": "Entgra Connector",
+    "owner": "WSO2",
+    "category": "Adaptive Authentication Function",
+    "documentationUrl": "https://github.com/wso2-extensions/identity-conditional-auth-entgra/tree/main/docs",
+    "description": "",
+    "status": "Active",
+    "labels": [
+        "RBA"
+    ],
+    "releases": []
+}
