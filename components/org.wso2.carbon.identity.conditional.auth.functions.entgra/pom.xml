@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.carbon.identity.conditional.auth.entgra</groupId>
         <artifactId>identity-conditional-auth-entgra</artifactId>
-        <version>0.0.1548-SNAPSHOT</version>
+        <version>0.0.1548</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
