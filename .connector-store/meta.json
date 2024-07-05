@@ -8,5 +8,13 @@
     "labels": [
         "RBA"
     ],
-    "releases": []
+    "releases": [
+        {
+            "tagName": "0.0.38",
+            "products": [
+                "IS 6.0.0",
+                "IS 5.11.0"
+            ]
+        }
+    ]
 }
