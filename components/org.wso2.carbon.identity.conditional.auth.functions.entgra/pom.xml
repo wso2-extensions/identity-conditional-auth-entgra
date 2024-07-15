@@ -119,7 +119,7 @@
                             version="${carbon.identity.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.authentication.framework.context;
                             version="${carbon.identity.framework.imp.pkg.version.range}",
-                            org.wso2.carbon.identity.conditional.auth.functions.common.*,
+                            org.wso2.carbon.identity.conditional.auth.functions.common.utils,
                             org.wso2.carbon.identity.event;
                             version="${carbon.identity.framework.imp.pkg.version.range}",
                         </Import-Package>
