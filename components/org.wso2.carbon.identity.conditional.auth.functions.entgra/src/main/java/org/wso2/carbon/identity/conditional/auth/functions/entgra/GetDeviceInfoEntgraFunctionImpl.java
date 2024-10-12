@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.identity.conditional.auth.functions.entgra;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -47,6 +48,7 @@ import org.wso2.carbon.identity.event.IdentityEventException;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
@@ -68,6 +70,8 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
 
     private static final Log LOG = LogFactory.getLog(GetDeviceInfoEntgraFunctionImpl.class);
     private CloseableHttpClient client;
+    private static final char DOMAIN_SEPARATOR = '.';
+    private final List<String> allowedDomains;
 
     public GetDeviceInfoEntgraFunctionImpl() {
 
@@ -80,7 +84,7 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 .setRelativeRedirectsAllowed(false)
                 .build();
         client = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
-
+        allowedDomains = ConfigProvider.getInstance().getAllowedDomainsForHttpFunctions();
     }
 
     @Override
@@ -107,6 +111,17 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                 try {
                     HttpPost tokenRequest = getTokenRequest(tokenURL, clientKey, clientSecret);
 
+                    if (!isValidRequestDomain(tokenRequest.getURI())) {
+                        outcome = OUTCOME_FAIL;
+                        response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED,
+                                "Access is denied. Please contact your administrator.");
+
+                        LOG.error("Provided Url does not contain a allowed domain. Invalid Url: " +
+                                tokenRequest.getURI().toString());
+                        asyncReturn.accept(authenticationContext, response, outcome);
+                        return;
+                    }
+
                     // For catching and logging errors.
                     String errorURL = tokenURL;
                     try (CloseableHttpResponse tResponse = client.execute(tokenRequest)) {
@@ -117,10 +132,21 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                             JSONParser parser = new JSONParser();
                             JSONObject jsonTokenResponse = (JSONObject) parser.parse(tJsonString);
                             String accessToken = (String) jsonTokenResponse.get(Constants.ACCESS_TOKEN);
+                            tResponse.close();
 
                             HttpGet deviceInfoRequest = getDeviceInfoRequest(deviceInfoURL, accessToken);
 
-                            tResponse.close();
+                            if (!isValidRequestDomain(deviceInfoRequest.getURI())) {
+                                outcome = OUTCOME_FAIL;
+                                response = getErrorJsonObject(Constants.AuthResponseErrorCode.ACCESS_DENIED,
+                                        "Access is denied. Please contact your administrator.");
+
+                                LOG.error("Provided Url does not contain a allowed domain. Invalid Url: " +
+                                        deviceInfoRequest.getURI().toString());
+                                asyncReturn.accept(authenticationContext, response, outcome);
+                                return;
+                            }
+
                             try (CloseableHttpResponse dResponse = client.execute(deviceInfoRequest)) {
                                 int dResponseCode = dResponse.getStatusLine().getStatusCode();
 
@@ -148,8 +174,11 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                                 Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER,
                                                 "Access is denied. Please contact your administrator.");
                                     }
+                                } else if (dResponseCode == 404) {
+                                    outcome = OUTCOME_FAIL;
+                                    response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
+                                            "Device is not recognized. Please register your device.");
                                 } else {
-
                                     LOG.error("Error while fetching device information from Entgra Server. " +
                                             "Response code: " + dResponseCode);
                                     outcome = OUTCOME_FAIL;
@@ -158,14 +187,6 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
                                 errorURL = deviceInfoURL;
                                 throw e;
                             }
-
-                        } else if (tokenResponseCode == 404) {
-                            LOG.error("Error while requesting access token from Entgra Server. Response code: "
-                                    + tokenResponseCode);
-                            outcome = OUTCOME_FAIL;
-                            response = getErrorJsonObject(Constants.AuthResponseErrorCode.DEVICE_NOT_ENROLLED,
-                                    "Device is not recognized. Please register your device.");
-
                         } else {
                             LOG.error("Error while requesting access token from Entgra Server. Response code: "
                                     + tokenResponseCode);
@@ -265,5 +286,63 @@ public class GetDeviceInfoEntgraFunctionImpl implements GetDeviceInfoEntgraFunct
         errorMap.put("errorCode", errorCode);
         errorMap.put("errorMessage", errorMessage);
         return errorMap;
+    }
+
+    /**
+     * Return true if the request domain is valid or return false if the request domain is invalid.
+     * @param url
+     * @return validity
+     */
+    private boolean isValidRequestDomain(URI url) {
+
+        if (url == null) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Provided url for domain restriction checking is null");
+            }
+            return false;
+        }
+
+        if (allowedDomains.isEmpty()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("No domains configured for domain restriction. Allowing url by default. Url: "
+                        + url.toString());
+            }
+            return true;
+        }
+
+        String domain = getParentDomainFromUrl(url);
+        if (StringUtils.isEmpty(domain)) {
+            LOG.error("Unable to determine the domain of the url: " + url.toString());
+            return false;
+        }
+
+        if (allowedDomains.contains(domain)) {
+            return true;
+        }
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Domain: " + domain + " extracted from url: " + url.toString() + " is not available in the " +
+                    "allowed domain list: " + StringUtils.join(allowedDomains, ','));
+        }
+        return false;
+    }
+
+    private String getParentDomainFromUrl(URI url) {
+
+        String parentDomain = null;
+        String domain = url.getHost();
+        String[] domainArr;
+        if (domain != null) {
+            domainArr = StringUtils.split(domain, DOMAIN_SEPARATOR);
+            if (domainArr.length != 0) {
+                parentDomain = domainArr.length == 1 ? domainArr[0] : domainArr[domainArr.length - 2];
+                parentDomain = parentDomain.toLowerCase();
+            }
+        }
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Parent domain: " + parentDomain + " extracted from url: " + url.toString());
+        }
+        return parentDomain;
     }
 }
